@@ -49,6 +49,8 @@ public class Movement : MonoBehaviour
 
     void ApplyRotation(float pitchThisFrame)
     {
+        _rigidbody.freezeRotation = true;
         _transform.Rotate(Vector3.forward * pitchThisFrame * Time.deltaTime);
+        _rigidbody.freezeRotation = false;
     }
 }
