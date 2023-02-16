@@ -3,9 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
+    [SerializeField] private float _delay = 1.5f;
     void OnCollisionEnter(Collision collision)
     {
-        int _currentScene = SceneManager.sceneCount;
         switch(collision.gameObject.tag) 
         {
             case "Friendly":
@@ -13,16 +13,39 @@ public class CollisionHandler : MonoBehaviour
                 break;
             case "Finish":
                 Debug.Log("You won!");
+                StartWinSequence();
                 break;
             default:
                 Debug.Log("You died");
-                ReloadLevel(_currentScene);
+                StartCrashSequence();
                 break;
         }
     }
 
-    private void ReloadLevel(int _currentScene)
+    private void StartCrashSequence()
     {
-        SceneManager.LoadScene(_currentScene);
+        GetComponent<Movement>().enabled = false;
+        Invoke("ReloadLevel", _delay);
+    }
+
+    private void StartWinSequence()
+    {
+        GetComponent<Movement>().enabled = false;
+        Invoke("NextLevel", _delay);
+    }
+
+    private void ReloadLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void NextLevel()
+    {
+        int nextScene = SceneManager.GetActiveScene().buildIndex + 1;
+        if (nextScene == SceneManager.sceneCountInBuildSettings)
+        {
+            nextScene = 0;
+        }
+        SceneManager.LoadScene(nextScene);
     }
 }
