@@ -6,6 +6,7 @@ public class Movement : MonoBehaviour
 {
     Rigidbody _rigidbody;
     Transform _transform;
+    AudioSource _audio;
 
     [SerializeField] private float _thrust = 750f;
     [SerializeField] private float _pitch = 5f;
@@ -15,6 +16,7 @@ public class Movement : MonoBehaviour
     {
         _rigidbody = GetComponent<Rigidbody>();
         _transform = GetComponent<Transform>();
+        _audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -29,7 +31,15 @@ public class Movement : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             _rigidbody.AddRelativeForce(Vector3.up * _thrust * Time.deltaTime);
+            if (!_audio.isPlaying)
+            {
+                _audio.Play();
+            }
             Debug.Log("Pressed space; Thrusting");
+        } 
+        else
+        {
+            _audio.Stop();
         }
     }
 
