@@ -8,6 +8,7 @@ public class Movement : MonoBehaviour
     Transform _transform;
     AudioSource _audio;
 
+    [SerializeField] AudioClip _thrusterSound;
     [SerializeField] private float _thrust = 750f;
     [SerializeField] private float _pitch = 5f;
 
@@ -33,7 +34,7 @@ public class Movement : MonoBehaviour
             _rigidbody.AddRelativeForce(Vector3.up * _thrust * Time.deltaTime);
             if (!_audio.isPlaying)
             {
-                _audio.Play();
+                _audio.PlayOneShot(_thrusterSound);
             }
             Debug.Log("Pressed space; Thrusting");
         } 

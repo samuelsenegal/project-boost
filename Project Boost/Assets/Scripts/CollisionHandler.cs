@@ -3,7 +3,17 @@ using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
+    [SerializeField] AudioClip _success;
+    [SerializeField] AudioClip _fail;
     [SerializeField] private float _delay = 1.5f;
+
+    AudioSource _audio;
+
+    void Start()
+    {
+        _audio = GetComponent<AudioSource>();
+    }
+
     void OnCollisionEnter(Collision collision)
     {
         switch(collision.gameObject.tag) 
@@ -12,11 +22,9 @@ public class CollisionHandler : MonoBehaviour
                 Debug.Log("You hit a friendly");
                 break;
             case "Finish":
-                Debug.Log("You won!");
                 StartWinSequence();
                 break;
             default:
-                Debug.Log("You died");
                 StartCrashSequence();
                 break;
         }
@@ -24,12 +32,16 @@ public class CollisionHandler : MonoBehaviour
 
     private void StartCrashSequence()
     {
+        // TODO: Add Flair
+        _audio.PlayOneShot(_fail);
         GetComponent<Movement>().enabled = false;
         Invoke("ReloadLevel", _delay);
     }
 
     private void StartWinSequence()
     {
+        // TODO: Add Flair
+        _audio.PlayOneShot(_success);
         GetComponent<Movement>().enabled = false;
         Invoke("NextLevel", _delay);
     }
