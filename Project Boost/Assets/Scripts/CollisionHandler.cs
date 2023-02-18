@@ -9,6 +9,8 @@ public class CollisionHandler : MonoBehaviour
 
     AudioSource _audio;
 
+    private bool _isTransitioning = false;
+
     void Start()
     {
         _audio = GetComponent<AudioSource>();
@@ -22,10 +24,16 @@ public class CollisionHandler : MonoBehaviour
                 Debug.Log("You hit a friendly");
                 break;
             case "Finish":
-                StartWinSequence();
+                if (!_isTransitioning)
+                {
+                    StartWinSequence();
+                }
                 break;
             default:
-                StartCrashSequence();
+                if (!_isTransitioning)
+                {
+                    StartCrashSequence();
+                }
                 break;
         }
     }
@@ -33,6 +41,8 @@ public class CollisionHandler : MonoBehaviour
     private void StartCrashSequence()
     {
         // TODO: Add Flair
+        _isTransitioning = true;
+        _audio.Stop();
         _audio.PlayOneShot(_fail);
         GetComponent<Movement>().enabled = false;
         Invoke("ReloadLevel", _delay);
@@ -41,6 +51,8 @@ public class CollisionHandler : MonoBehaviour
     private void StartWinSequence()
     {
         // TODO: Add Flair
+        _isTransitioning = true;
+        _audio.Stop();
         _audio.PlayOneShot(_success);
         GetComponent<Movement>().enabled = false;
         Invoke("NextLevel", _delay);
