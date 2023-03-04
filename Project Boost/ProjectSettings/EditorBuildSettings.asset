@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Fly Between.unity
     guid: 5f4478caf9151104c9cd4c2b93499d43
+  - enabled: 1
+    path: Assets/Scenes/Fly Versus Fly.unity
+    guid: ffc5dcac912d19648b10094e44b7c583
   m_configObjects: {}
