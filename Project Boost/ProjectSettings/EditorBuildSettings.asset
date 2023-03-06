@@ -5,13 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/Long Fly.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    guid: d748b84e083d7fd44ae781364b12990c
   - enabled: 1
     path: Assets/Scenes/Fly Between.unity
     guid: 5f4478caf9151104c9cd4c2b93499d43
   - enabled: 1
     path: Assets/Scenes/Fly Versus Fly.unity
     guid: ffc5dcac912d19648b10094e44b7c583
+  - enabled: 1
+    path: Assets/Scenes/Double Fly.unity
+    guid: dbb0dfb4b86389c40b665c526ea653fd
   m_configObjects: {}
